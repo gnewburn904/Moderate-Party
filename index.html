@@ -1,776 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Moderate Party - Political Power for Normal People</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --moderate-red: #E63946;
-            --moderate-blue: #1D3557;
-            --moderate-light-blue: #457B9D;
-            --moderate-white: #F1FAEE;
-            --moderate-gold: #D4AF37;
-            --moderate-green: #2D5016;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Archivo', sans-serif;
-            background: linear-gradient(135deg, var(--moderate-blue) 0%, var(--moderate-light-blue) 100%);
-            color: var(--moderate-white);
-            overflow-x: hidden;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding: 2rem;
-            background: 
-                linear-gradient(135deg, rgba(29, 53, 87, 0.95) 0%, rgba(69, 123, 157, 0.9) 100%),
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px);
-        }
-
-        .stars-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(2px 2px at 20% 30%, white, transparent),
-                radial-gradient(2px 2px at 60% 70%, white, transparent),
-                radial-gradient(1px 1px at 50% 50%, white, transparent),
-                radial-gradient(1px 1px at 80% 10%, white, transparent),
-                radial-gradient(2px 2px at 90% 60%, white, transparent),
-                radial-gradient(1px 1px at 33% 80%, white, transparent);
-            background-size: 200% 200%;
-            background-position: 0% 0%, 40% 60%, 130% 270%, 70% 100%;
-            opacity: 0.3;
-            animation: twinkle 8s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        .logo-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 2rem;
-            position: relative;
-            z-index: 2;
-            animation: fadeInScale 1s ease-out;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .logo-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
-        }
-
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(3rem, 10vw, 7rem);
-            letter-spacing: 0.05em;
-            line-height: 0.9;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-            animation: slideInDown 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes slideInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slogan {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--moderate-red);
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-            z-index: 2;
-            animation: slideInUp 0.8s ease-out 0.4s both;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .tagline {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            line-height: 1.6;
-            position: relative;
-            z-index: 2;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            animation: fadeIn 1s ease-out 0.8s both;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary {
-            background: var(--moderate-red);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #c62f3a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--moderate-blue);
-        }
-
-        .btn-secondary:hover {
-            background: var(--moderate-white);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,255,255,0.3);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: var(--moderate-white);
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.8);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .platform-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .platform-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--moderate-red), var(--moderate-gold));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .platform-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--moderate-red);
-            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
-        }
-
-        .platform-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .platform-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .platform-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--moderate-white);
-        }
-
-        .platform-description {
-            color: rgba(255,255,255,0.9);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .about-section {
-            background: linear-gradient(135deg, var(--moderate-red) 0%, #c62f3a 100%);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .statement-box {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .statement-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        .statement-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .goals-list {
-            list-style: none;
-        }
-
-        .goal-item {
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--moderate-gold);
-            transition: all 0.3s ease;
-        }
-
-        .goal-item:hover {
-            transform: translateX(10px);
-            background: rgba(255,255,255,0.2);
-        }
-
-        .action-plan {
-            background: linear-gradient(135deg, var(--moderate-light-blue) 0%, var(--moderate-blue) 100%);
-        }
-
-        .action-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .action-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .action-card:hover {
-            background: rgba(255,255,255,0.15);
-            transform: scale(1.05);
-        }
-
-        .action-number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            color: var(--moderate-red);
-            margin-bottom: 1rem;
-        }
-
-        .big-tent {
-            background: rgba(255,255,255,0.95);
-            color: var(--moderate-blue);
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-
-        .big-tent-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: var(--moderate-blue);
-            margin-bottom: 1.5rem;
-        }
-
-        .big-tent-text {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-        }
-
-        .contact-section {
-            background: var(--moderate-blue);
-            padding: 4rem 2rem;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
-            margin: 2rem auto;
-        }
-
-        .contact-card {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-5px);
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-label {
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--moderate-red);
-        }
-
-        .contact-info {
-            font-size: 1rem;
-            color: rgba(255,255,255,0.9);
-        }
-
-        .footer {
-            background: #0a1929;
-            padding: 2rem;
-            text-align: center;
-            color: rgba(255,255,255,0.7);
-        }
-
-        .footer-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: var(--moderate-white);
-            margin-bottom: 0.5rem;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(29, 53, 87, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        nav.visible {
-            transform: translateY(0);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--moderate-white);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-        }
-
-        nav a:hover {
-            color: var(--moderate-red);
-        }
-    </style>
-</head>
-<body>
-    <nav id="navbar">
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#platform">Platform</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#action">Action Plan</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <section class="hero" id="home">
-        <div class="stars-bg"></div>
-        <div class="logo-container">
-            <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <!-- Tree/Pillar Symbol inspired by the pamphlet -->
-                <defs>
-                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#F4E5A5;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                
-                <!-- Base/Platform -->
-                <rect x="60" y="170" width="80" height="8" fill="url(#goldGradient)"/>
-                
-                <!-- Pillars -->
-                <rect x="70" y="130" width="12" height="40" fill="url(#goldGradient)"/>
-                <rect x="94" y="130" width="12" height="40" fill="url(#goldGradient)"/>
-                <rect x="118" y="130" width="12" height="40" fill="url(#goldGradient)"/>
-                
-                <!-- Capital/Top -->
-                <path d="M 55 130 L 70 120 L 130 120 L 145 130 Z" fill="url(#goldGradient)"/>
-                
-                <!-- Tree Crown -->
-                <circle cx="100" cy="80" r="45" fill="#2D5016" opacity="0.9"/>
-                <circle cx="85" cy="70" r="30" fill="#3D6D1F" opacity="0.9"/>
-                <circle cx="115" cy="70" r="30" fill="#3D6D1F" opacity="0.9"/>
-                <circle cx="100" cy="55" r="35" fill="#4D7D2F" opacity="0.9"/>
-                
-                <!-- Decorative leaves -->
-                <path d="M 100 30 Q 80 40 75 60" stroke="#D4AF37" stroke-width="2" fill="none"/>
-                <path d="M 100 30 Q 120 40 125 60" stroke="#D4AF37" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
-        <h1>THE MODERATE<br>PARTY</h1>
-        <p class="slogan">"Political Power for Normal People"</p>
-        <p class="tagline">A home for regular people. If you're sick of extremists dominating U.S. politics, it's time to organize and make America normal again!</p>
-        <div class="cta-buttons">
-            <a href="#platform" class="btn btn-primary">View Our Platform</a>
-            <a href="#contact" class="btn btn-secondary">Get Involved</a>
-        </div>
-        <div class="scroll-indicator">
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-                <path d="M15 5 L15 25 M15 25 L10 20 M15 25 L20 20" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </div>
-    </section>
-
-    <section class="section" id="platform">
-        <div class="section-header">
-            <h2 class="section-title">Our Platform</h2>
-            <p class="section-subtitle">Common-sense solutions for the challenges facing regular Americans</p>
-        </div>
-        <div class="platform-grid">
-            <div class="platform-card">
-                <div class="platform-icon">👮</div>
-                <h3 class="platform-title">Public Safety</h3>
-                <p class="platform-description">We believe every community deserves to feel safe. We'll hire 100,000 additional police officers nationwide to strengthen community policing, improve response times, and build trust between law enforcement and the neighborhoods they serve. Safe streets are fundamental to a thriving society.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">💰</div>
-                <h3 class="platform-title">Taxes & Spending</h3>
-                <p class="platform-description">Fiscal responsibility matters. We'll raise the top marginal tax rate to ensure the wealthiest pay their fair share while working to balance the federal budget. Smart spending and fair taxation will reduce our deficit and invest in America's future without burdening middle-class families.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🛡️</div>
-                <h3 class="platform-title">National Security</h3>
-                <p class="platform-description">Peace through strength remains our guiding principle. We support a strong national defense based on Mutually Assured Force Only (MAFO) - maintaining military readiness to deter aggression while avoiding unnecessary conflicts. A powerful America keeps the peace without being the world's police force.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🌍</div>
-                <h3 class="platform-title">International Relations</h3>
-                <p class="platform-description">America thrives when the world trades freely and peacefully. We support open trade agreements that benefit American workers and consumers, while maintaining diplomatic relationships with all nations. Cooperation, not isolation, makes us stronger and more prosperous.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🗽</div>
-                <h3 class="platform-title">Immigration</h3>
-                <p class="platform-description">America has always been a nation of immigrants. We welcome everyone who comes peacefully and wants to contribute to our society. A fair, efficient immigration system that processes people quickly while maintaining security serves everyone's interests and honors our heritage as a land of opportunity.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🏥</div>
-                <h3 class="platform-title">Health Care</h3>
-                <p class="platform-description">Quality healthcare starts with more healthcare workers. We'll invest in training programs to increase the number of doctors and nurses nationwide. We'll also learn from recent challenges to prepare robust pandemic response systems, ensuring we're never caught unprepared again.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">📚</div>
-                <h3 class="platform-title">Education</h3>
-                <p class="platform-description">Every child deserves a great start and quality education. We support universal Pre-K to give all children equal opportunities from the beginning, and we believe parents should have school choice to find the best fit for their family. Education is the foundation of opportunity.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🌱</div>
-                <h3 class="platform-title">Environment</h3>
-                <p class="platform-description">Clean air and clean water aren't political issues - they're human necessities. We'll enforce environmental protections to ensure every American has access to safe drinking water and breathable air, while taking meaningful action to address global warming through practical, science-based policies.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">⚡</div>
-                <h3 class="platform-title">Energy</h3>
-                <p class="platform-description">Nuclear energy is clean, reliable, and American. We'll invest in next-generation nuclear power plants to achieve energy independence while reducing carbon emissions. Modern nuclear technology is safe and provides the consistent power our economy needs without relying on foreign oil.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🛣️</div>
-                <h3 class="platform-title">Infrastructure</h3>
-                <p class="platform-description">America's roads, bridges, and public transit systems need serious attention. We'll invest in repairing and modernizing our infrastructure to improve safety, reduce commute times, and support economic growth. Good infrastructure isn't a luxury - it's essential for a functioning country.</p>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon">🤝</div>
-                <h3 class="platform-title">Social Insurance</h3>
-                <p class="platform-description">A safety net helps everyone reach their potential. We support Universal Basic Income to provide economic security, along with affordable child care and daycare programs that allow parents to work without sacrificing their children's wellbeing. Supporting families strengthens our entire society.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section about-section" id="about">
-        <div class="section-header">
-            <h2 class="section-title">Our Mission</h2>
-        </div>
-        <div class="about-content">
-            <div class="statement-box">
-                <h3 class="statement-title">Statement of Intent</h3>
-                <p class="statement-text">The Moderate Party exists to give political power back to everyday Americans. For too long, extremists on both sides have been in control of our government, and everyone is worse off. By organizing regular people all over the country, we can make America normal again!</p>
-            </div>
-            <div>
-                <h3 class="statement-title" style="margin-bottom: 1.5rem;">Our Goals</h3>
-                <ul class="goals-list">
-                    <li class="goal-item">
-                        <strong>1 million members by 2028</strong>
-                    </li>
-                    <li class="goal-item">
-                        <strong>Elect Moderates in city, county, state, and federal elections in 2028</strong>
-                    </li>
-                    <li class="goal-item">
-                        <strong>Save America from the extremists</strong>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="section action-plan" id="action">
-        <div class="section-header">
-            <h2 class="section-title">Action Plan</h2>
-            <p class="section-subtitle">How we're building a movement of normal people</p>
-        </div>
-        <div class="action-cards">
-            <div class="action-card">
-                <div class="action-number">01</div>
-                <h3 class="platform-title">Start Local</h3>
-                <p class="platform-description">Establish local chapters and build community trust from the ground up</p>
-            </div>
-            <div class="action-card">
-                <div class="action-number">02</div>
-                <h3 class="platform-title">Organize Normal People</h3>
-                <p class="platform-description">Build coalitions of voters who feel left out by the extremes</p>
-            </div>
-            <div class="action-card">
-                <div class="action-number">03</div>
-                <h3 class="platform-title">Run Credible Candidates</h3>
-                <p class="platform-description">No embarrassing kooks, crazies, or fringe weirdos. Just normal people</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="big-tent">
-        <h2 class="big-tent-title">A Big Tent for Everyone</h2>
-        <p class="big-tent-text">We don't discriminate and we don't have purity tests. We know we won't always agree, but that's OK. If you're basically normal, you're one of us.</p>
-        <div style="margin-top: 2rem;">
-            <h3 style="font-size: 1.8rem; color: var(--moderate-blue); margin-bottom: 1rem; font-weight: 700;">A Reminder</h3>
-            <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">America is a democracy, and there are more normal people than there are extremists. If we organize and build political power together, we can change the country!</p>
-        </div>
-    </section>
-
-    <section class="section contact-section" id="contact">
-        <div class="section-header">
-            <h2 class="section-title">Get Involved</h2>
-            <p class="section-subtitle">Join the movement and help make America normal again</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <div class="contact-icon">📞</div>
-                <h3 class="contact-label">Phone</h3>
-                <p class="contact-info">352.283.6249</p>
-            </div>
-            <div class="contact-card">
-                <div class="contact-icon">✉️</div>
-                <h3 class="contact-label">Email</h3>
-                <p class="contact-info">roryn29@oakhall.org</p>
-            </div>
-            <div class="contact-card">
-                <div class="contact-icon">📍</div>
-                <h3 class="contact-label">Address</h3>
-                <p class="contact-info">1700 SW 75th Street<br>Gainesville, FL 32607</p>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 3rem;">
-            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Party Chair</h3>
-            <p style="font-size: 1.2rem;">Rory Newburn</p>
-            <div style="margin-top: 2rem;">
-                <a href="http://www.moderateparty.org" class="btn btn-primary" style="display: inline-block;">Visit Our Website</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-logo">THE MODERATE PARTY</div>
-        <p>&copy; 2028 The Moderate Party. Political Power for Normal People.</p>
-    </footer>
-
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Show/hide navbar on scroll
-        let lastScroll = 0;
-        const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('visible');
-            } else {
-                navbar.classList.remove('visible');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        // Add intersection observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all platform cards
-        document.querySelectorAll('.platform-card, .action-card, .contact-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    </script>
-</body>
-</html>
+		HOME
+		PLATFORM
+		ABOUT
+		ACTION PLAN
+		CONTACT
+
+
+THE MODERATE PARTY
+"POLITICAL POWER FOR NORMAL PEOPLE"
+A home for regular people. If you're sick of extremists dominating U.S. politics, it's time to organize and make America normal again!
+VIEW OUR PLATFORM
+GET INVOLVED
+
+Our Platform
+Common-sense solutions for the challenges facing regular Americans
+👮
+Public Safety
+We believe every community deserves to feel safe. We'll hire 100,000 additional police officers nationwide to strengthen community policing, improve response times, and build trust between law enforcement and the neighborhoods they serve. Safe streets are fundamental to a thriving society.
+💰
+Taxes & Spending
+Fiscal responsibility matters. We'll raise the top marginal tax rate to ensure the wealthiest pay their fair share while working to balance the federal budget. Smart spending and fair taxation will reduce our deficit and invest in America's future without burdening middle-class families.
+🛡️
+National Security
+Peace through strength remains our guiding principle. We support a strong national defense based on Mutually Assured Force Only (MAFO) - maintaining military readiness to deter aggression while avoiding unnecessary conflicts. A powerful America keeps the peace without being the world's police force.
+🌍
+International Relations
+America thrives when the world trades freely and peacefully. We support open trade agreements that benefit American workers and consumers, while maintaining diplomatic relationships with all nations. Cooperation, not isolation, makes us stronger and more prosperous.
+🗽
+Immigration
+America has always been a nation of immigrants. We welcome everyone who comes peacefully and wants to contribute to our society. A fair, efficient immigration system that processes people quickly while maintaining security serves everyone's interests and honors our heritage as a land of opportunity.
+🏥
+Health Care
+Quality healthcare starts with more healthcare workers. We'll invest in training programs to increase the number of doctors and nurses nationwide. We'll also learn from recent challenges to prepare robust pandemic response systems, ensuring we're never caught unprepared again.
+📚
+Education
+Every child deserves a great start and quality education. We support universal Pre-K to give all children equal opportunities from the beginning, and we believe parents should have school choice to find the best fit for their family. Education is the foundation of opportunity.
+🌱
+Environment
+Clean air and clean water aren't political issues - they're human necessities. We'll enforce environmental protections to ensure every American has access to safe drinking water and breathable air, while taking meaningful action to address global warming through practical, science-based policies.
+⚡
+Energy
+Nuclear energy is clean, reliable, and American. We'll invest in next-generation nuclear power plants to achieve energy independence while reducing carbon emissions. Modern nuclear technology is safe and provides the consistent power our economy needs without relying on foreign oil.
+🛣️
+Infrastructure
+America's roads, bridges, and public transit systems need serious attention. We'll invest in repairing and modernizing our infrastructure to improve safety, reduce commute times, and support economic growth. Good infrastructure isn't a luxury - it's essential for a functioning country.
+🤝
+Social Insurance
+A safety net helps everyone reach their potential. We support Universal Basic Income to provide economic security, along with affordable child care and daycare programs that allow parents to work without sacrificing their children's wellbeing. Supporting families strengthens our entire society.
+Our Mission
+Statement of Intent
+The Moderate Party exists to give political power back to everyday Americans. For too long, extremists on both sides have been in control of our government, and everyone is worse off. By organizing regular people all over the country, we can make America normal again!
+Our Goals
+		1 million members by 2028
+		Elect Moderates in city, county, state, and federal elections in 2028
+		Save America from the extremists
+Action Plan
+How we're building a movement of normal people
+01
+Start Local
+Establish local chapters and build community trust from the ground up
+02
+Organize Normal People
+Build coalitions of voters who feel left out by the extremes
+03
+Run Credible Candidates
+No embarrassing kooks, crazies, or fringe weirdos. Just normal people
+A Big Tent for Everyone
+We don't discriminate and we don't have purity tests. We know we won't always agree, but that's OK. If you're basically normal, you're one of us.
+A Reminder
+America is a democracy, and there are more normal people than there are extremists. If we organize and build political power together, we can change the country!
+Get Involved
+Join the movement and help make America normal again
+📞
+Phone
+352.283.6249
+✉️
+Email
+roryn29@oakhall.org
+📍
+Address
+1700 SW 75th Street Gainesville, FL 32607
+Party Chair
+Rory Newburn
+VISIT OUR WEBSITE
+THE MODERATE PARTY
+© 2028 The Moderate Party. Political Power for Normal People.
