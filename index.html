@@ -1001,6 +1001,24 @@
                 closeSignupForm();
             }
         });
+        
+        // FAQ Modal Functions
+        function openFaqModal() {
+            document.getElementById('faqModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFaqModal() {
+            document.getElementById('faqModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close FAQ modal when clicking outside
+        document.getElementById('faqModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeFaqModal();
+            }
+        });
     </script>
 </body>
 </html>
